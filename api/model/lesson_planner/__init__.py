@@ -15,8 +15,6 @@ def get_prediction(q: str):
         assistant_id = os.getenv("OPENAI_LESSON_PLANNER_ID")
 
         assistant = openai.beta.assistants.retrieve(assistant_id)
-        
-        print(assistant)
 
         thread = openai.beta.threads.create()
         
@@ -34,12 +32,16 @@ def get_prediction(q: str):
             actual_run = openai.beta.threads.runs.retrieve(run.id, thread_id=thread.id)
         
         # now that the run is completed, return the output
-        assistant_messages = openai.beta.threads.messages.list(thread.id)
+        assistant_messages = openai.beta.threads.messages.list(thread.id).data
         
         # return the last message filtered by the run id
-        last_message_from_run = assistant_messages.data[-1]
+        last_message_from_run = filter(lambda message: message.run_id == run.id and message.role == "assistant", assistant_messages)
 
-        return last_message_from_run
+        # if found return content, otherwise return empty string
+        if last_message_from_run:
+            return list(last_message_from_run)
+        else:
+            return "El asistente se encuentra ocupado, por favor intente más tarde"
     except Exception as e:
         print(e)
         return "Error"
