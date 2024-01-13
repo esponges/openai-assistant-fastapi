@@ -3,14 +3,16 @@ import os
 import openai
 import time
 
-item_router = APIRouter()
+lesson_planner_router = APIRouter()
+
+api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = api_key
 
 # declare get_prediction function that takes a query parameter as input
-@item_router.get("/get_prediction")
-def get_prediction(query: str):
+@lesson_planner_router.get("/get_prediction")
+def get_prediction(q: str):
     try:
-        api_key = os.getenv("OPENAI_API_KEY")
-        assistant_id = os.getenv("OPENAI_ASSISTANT_ID")
+        assistant_id = os.getenv("OPENAI_LESSON_PLANNER_ID")
 
         assistant = openai.beta.assistants.retrieve(assistant_id)
         
@@ -18,7 +20,7 @@ def get_prediction(query: str):
 
         thread = openai.beta.threads.create()
         
-        openai.beta.threads.messages.create(thread.id, text=query)
+        openai.beta.threads.messages.create(thread.id, content=q, role="user")
 
         run = openai.beta.threads.runs.create(thread.id, assistant_id=assistant.id)
         actual_run = openai.beta.threads.runs.retrieve(run.id, thread_id=thread.id)
@@ -41,5 +43,4 @@ def get_prediction(query: str):
     except Exception as e:
         print(e)
         return "Error"
-    
     

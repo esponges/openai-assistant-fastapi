@@ -23,7 +23,7 @@ def main(env: str, debug: bool):
     os.environ["ENV"] = env
     os.environ["DEBUG"] = str(debug)
     # confirm dotenv is working
-    print('OPENAI KEY', os.getenv("OPENAI_API_KEY"))
+    print('LESSON KEY', os.getenv("OPENAI_LESSON_PLANNER_ID"))
     uvicorn.run(
         app="app.server:app",
         # host=config.APP_HOST,
