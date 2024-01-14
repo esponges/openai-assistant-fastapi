@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 @click.command()
 @click.option(
     "--env",
@@ -17,23 +16,21 @@ load_dotenv()
     "--debug",
     type=click.BOOL,
     is_flag=True,
-    default=False,
+    default=True,
 )
 def main(env: str, debug: bool):
     os.environ["ENV"] = env
     os.environ["DEBUG"] = str(debug)
-    # print(type(os.environ["ENV"]))
-    # print(type(os.environ["DEBUG"]))
-    # confirm dotenv is working
-    print("LESSON KEY", os.getenv("OPENAI_LESSON_PLANNER_ID"))
+    print("ENV", os.getenv("ENV"))
+    print("DEBUG", os.getenv("DEBUG"))
     uvicorn.run(
         app="app.server:app",
         # host=config.APP_HOST,
         # port=config.APP_PORT,
-        # reload=True if config.ENV != "production" else False,
+        reload= env != "prod",
         workers=1,
     )
 
 
 if __name__ == "__main__":
-    main()
+    main() # pylint: disable=no-value-for-parameter
