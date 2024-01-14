@@ -22,6 +22,8 @@ load_dotenv()
 def main(env: str, debug: bool):
     os.environ["ENV"] = env
     os.environ["DEBUG"] = str(debug)
+    # print(type(os.environ["ENV"]))
+    # print(type(os.environ["DEBUG"]))
     # confirm dotenv is working
     print("LESSON KEY", os.getenv("OPENAI_LESSON_PLANNER_ID"))
     uvicorn.run(
@@ -34,4 +36,4 @@ def main(env: str, debug: bool):
 
 
 if __name__ == "__main__":
-    main("development", True)
+    main()
