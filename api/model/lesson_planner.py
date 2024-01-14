@@ -1,7 +1,7 @@
-from fastapi import APIRouter
 import os
 import openai
 import time
+from fastapi import APIRouter
 
 lesson_planner_router = APIRouter()
 
@@ -46,6 +46,6 @@ def get_prediction(q: str):
             return list(last_message_from_run)
         else:
             return "El asistente se encuentra ocupado, por favor intente más tarde"
-    except Exception as e:
+    except IOError as e:
         print(e)
         return "Error"

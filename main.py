@@ -34,4 +34,4 @@ def main(env: str, debug: bool):
 
 
 if __name__ == "__main__":
-    main()
+    main("development", True)

@@ -29,4 +29,17 @@ Then edit the `.env` file and add the required values.
 ```bash
 python main.py --env local --debug
 ```
-# openai-assistant-fastapi
+## Formatting with Black
+
+```bash
+black .
+```
+
+## Linting with Pylint
+
+Install extension for VSCode: https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylint
+
+Linting with Pylint CLI
+```bash
+pylint src
+```
