@@ -1,9 +1,11 @@
 # from typing import List, Optional
 # from sqlalchemy import select
 from app.item.models.item import Item
+
 # from core.db import Transactional, session
 
-class ItemService :
+
+class ItemService:
     def __init__(self):
         ...
 
@@ -37,7 +39,7 @@ class ItemService :
         # if not item:
         #     raise ItemNotFoundException
 
-        item = Item(id=item_id, name='fer', price=12.5, is_offer=True)
+        item = Item(id=item_id, name="fer", price=12.5, is_offer=True)
 
         return item
 

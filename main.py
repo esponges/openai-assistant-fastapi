@@ -1,4 +1,3 @@
-
 import os
 import click
 import uvicorn
@@ -6,6 +5,7 @@ import uvicorn
 from dotenv import load_dotenv
 
 load_dotenv()
+
 
 @click.command()
 @click.option(
@@ -23,7 +23,7 @@ def main(env: str, debug: bool):
     os.environ["ENV"] = env
     os.environ["DEBUG"] = str(debug)
     # confirm dotenv is working
-    print('LESSON KEY', os.getenv("OPENAI_LESSON_PLANNER_ID"))
+    print("LESSON KEY", os.getenv("OPENAI_LESSON_PLANNER_ID"))
     uvicorn.run(
         app="app.server:app",
         # host=config.APP_HOST,
@@ -35,4 +35,3 @@ def main(env: str, debug: bool):
 
 if __name__ == "__main__":
     main()
-

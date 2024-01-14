@@ -9,6 +9,7 @@ home_router = APIRouter()
 # async def home():
 #     return Response(status_code=200)
 
+
 # base path
 @home_router.get("/")
 async def home():
